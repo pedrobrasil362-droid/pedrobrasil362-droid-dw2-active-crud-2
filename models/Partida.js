@@ -1,25 +1,21 @@
-// Model pedido
-
-//Importando o arquivo de conexão
 import connection from "../config/sequelize-config.js";
-// Importando a biblioteca sequelize
 import Sequelize from "sequelize";
 
-const Pedido = connection.define("pedidos", {
-  // Atributos da tabela 'pedidos'
+const Partida = connection.define("partidas", {
   numero: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  valor: {
+  recompensa: {
     type: Sequelize.FLOAT,
     allowNull: false,
   },
-  // Chave Estrangeira
-  cliente_id: {
+  jogador_id: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
+}, {
+  tableName: "partidas",
 });
-// Exportando o modulo
-export default Pedido;
+
+export default Partida;

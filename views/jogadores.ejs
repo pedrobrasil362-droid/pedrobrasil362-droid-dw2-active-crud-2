@@ -1,0 +1,76 @@
+<%- include ('partials/header.ejs') %>
+<%- include ('partials/navbar.ejs') %>
+
+<main class="page-shell">
+    <section class="panel">
+        <div class="panel-heading">
+            <span class="card-icon">🎮</span>
+            <div>
+                <h1>Recrutar jogador</h1>
+                <p>Adicione um novo competidor ao seu esquadrão.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form action="/jogadores/cadastrar" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nome">Nick do jogador</label>
+                        <input type="text" name="nick" id="nome" placeholder="Ex.: LendaDaArena" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_jogador">ID de jogador</label>
+                        <input type="text" name="id_jogador" id="id_jogador" placeholder="Insira o ID do jogador" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clube_regiao">Clube / região</label>
+                        <input type="text" name="clube_regiao" id="clube_regiao" placeholder="Ex.: Clube Estelar" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success">+ Adicionar jogador</button>
+                    <button type="reset" class="btn btn-secondary">Limpar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="panel-heading">
+            <span class="card-icon">🏆</span>
+            <div>
+                <h2>Esquadrão de jogadores</h2>
+                <p>Competidores cadastrados na arena.</p>
+            </div>
+        </div>
+        <div class="panel-body table-wrap">
+            <table class="table table-hover">
+                <thead>
+                    <tr><th></th><th>Nick</th><th>ID de jogador</th><th>Clube / região</th><th>Ações</th></tr>
+                </thead>
+                <tbody>
+                    <% if (jogadores.length === 0) { %>
+                        <tr><td colspan="5" class="empty-state">Ainda não há jogadores no esquadrão. Recrute o primeiro!</td></tr>
+                    <% } %>
+                    <% jogadores.forEach(jogador => { %>
+                        <tr>
+                            <td><img src="imgs/avatar.png" class="table-icon" alt=""></td>
+                            <td><%= jogador.nick %></td>
+                            <td><%= jogador.id_jogador %></td>
+                            <td><%= jogador.clube_regiao %></td>
+                            <td>
+                                <div class="table-actions">
+                                    <a href="/jogadores/<%= jogador.id %>/editar" class="btn btn-secondary">Editar</a>
+                                    <form action="/jogadores/<%= jogador.id %>/excluir" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este jogador? Partidas vinculadas impedem a exclusão.')">
+                                        <button type="submit" class="btn btn-danger">Excluir</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<%- include ('partials/footer.ejs') %>

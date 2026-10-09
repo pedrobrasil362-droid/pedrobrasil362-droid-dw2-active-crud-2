@@ -1,0 +1,42 @@
+<%- include ('partials/header.ejs') %>
+<%- include ('partials/navbar.ejs') %>
+
+<main class="page-shell">
+    <section class="panel">
+        <div class="panel-heading">
+            <span class="card-icon">⚔️</span>
+            <div>
+                <h1>Editar partida</h1>
+                <p>Atualize os dados da partida #<%= partida.numero %>.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form action="/partidas/<%= partida.id %>/atualizar" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="numero">Número da partida</label>
+                        <input type="number" name="numero" id="numero" min="1" value="<%= partida.numero %>" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="recompensa">Recompensa (troféus)</label>
+                        <input type="number" name="recompensa" id="recompensa" min="0" step="0.01" value="<%= partida.recompensa %>" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jogador_id">Jogador do esquadrão</label>
+                        <select name="jogador_id" id="jogador_id" class="form-control" required>
+                            <% jogadores.forEach(jogador => { %>
+                                <option value="<%= jogador.id %>" <%= Number(partida.jogador_id) === Number(jogador.id) ? "selected" : "" %>><%= jogador.nick %></option>
+                            <% }) %>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success">Salvar alterações</button>
+                    <a href="/partidas" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<%- include ('partials/footer.ejs') %>

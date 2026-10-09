@@ -15,12 +15,9 @@ app.get("/", function (req, res) {
   res.render("index");
 });
 
-// Importando o Controller de Produto
-import ProdutoController from "./controllers/ProdutoController.js";
-// Importando o Controller de Produto
-import PedidoController from "./controllers/Pedido.Controller.js";
-// Importando o Controller de Produto
-import ClienteController from "./controllers/ClienteController.js";
+import BrawlerController from "./controllers/BrawlerController.js";
+import PartidaController from "./controllers/PartidaController.js";
+import JogadorController from "./controllers/JogadorController.js";
 
 // Importando as ASSOCIAÇÕES
 import defineAssociac from "./config/associations.js";
@@ -33,12 +30,9 @@ app.set("view engine", "ejs"); // EJS renderiza as páginas do site
 // Configurando a pasta 'PUBLIC' para arquivos estáticos
 app.use(express.static("public"));
 // Configurando as rotas
-// Inicializando as rotas de Produto
-app.use("/", ProdutoController);
-// Inicializando as rotas de Pedido
-app.use("/", PedidoController);
-// Inicializando as rotas de Cliente
-app.use("/", ClienteController);
+app.use("/", BrawlerController);
+app.use("/", PartidaController);
+app.use("/", JogadorController);
 
 const startServer = async () => {
   try {

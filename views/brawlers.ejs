@@ -11,19 +11,19 @@
             </div>
         </div>
         <div class="panel-body">
-            <form action="/produtos/cadastrar/" method="POST">
+            <form action="/brawlers/cadastrar" method="POST">
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="nome">Nome do brawler</label>
                         <input type="text" name="nome" id="nome" placeholder="Ex.: Lenda da arena" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="preco">Poder (moedas)</label>
-                        <input type="number" name="preco" id="preco" min="0" step="0.01" placeholder="Ex.: 500" class="form-control" required>
+                        <label for="poder">Poder (moedas)</label>
+                        <input type="number" name="poder" id="poder" min="0" step="0.01" placeholder="Ex.: 500" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="categoria">Classe</label>
-                        <input type="text" name="categoria" id="categoria" placeholder="Ex.: Destruidor" class="form-control" required>
+                        <label for="classe">Classe</label>
+                        <input type="text" name="classe" id="classe" placeholder="Ex.: Destruidor" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-actions">
@@ -45,18 +45,26 @@
         <div class="panel-body table-wrap">
             <table class="table table-hover">
                 <thead>
-                    <tr><th></th><th>Brawler</th><th>Poder</th><th>Classe</th></tr>
+                    <tr><th></th><th>Brawler</th><th>Poder</th><th>Classe</th><th>Ações</th></tr>
                 </thead>
                 <tbody>
-                    <% if (produtos.length === 0) { %>
-                        <tr><td colspan="4" class="empty-state">Sua coleção está vazia. Adicione seu primeiro brawler!</td></tr>
+                    <% if (brawlers.length === 0) { %>
+                        <tr><td colspan="5" class="empty-state">Sua coleção está vazia. Adicione seu primeiro brawler!</td></tr>
                     <% } %>
-                    <% produtos.forEach(produto => { %>
+                    <% brawlers.forEach(brawler => { %>
                         <tr>
                             <td><img src="imgs/product.png" class="table-icon" alt=""></td>
-                            <td><%= produto.nome %></td>
-                            <td>🪙 <%= Number(produto.preco).toLocaleString('pt-br', { maximumFractionDigits: 2 }) %></td>
-                            <td><%= produto.categoria %></td>
+                            <td><%= brawler.nome %></td>
+                            <td>🪙 <%= Number(brawler.poder).toLocaleString('pt-br', { maximumFractionDigits: 2 }) %></td>
+                            <td><%= brawler.classe %></td>
+                            <td>
+                                <div class="table-actions">
+                                    <a href="/brawlers/<%= brawler.id %>/editar" class="btn btn-secondary">Editar</a>
+                                    <form action="/brawlers/<%= brawler.id %>/excluir" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este brawler?')">
+                                        <button type="submit" class="btn btn-danger">Excluir</button>
+                                    </form>
+                                </div>
+                            </td>
                         </tr>
                     <% }) %>
                 </tbody>

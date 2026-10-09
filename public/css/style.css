@@ -386,6 +386,17 @@ select.form-control option {
   font-size: 0.95rem;
 }
 
+.table-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.table-actions .btn {
+  min-height: 38px;
+  padding: 8px 12px;
+}
+
 .table tbody tr:last-child td {
   border-bottom: 0;
 }

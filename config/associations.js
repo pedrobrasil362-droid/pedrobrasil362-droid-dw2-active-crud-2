@@ -1,19 +1,18 @@
-//Nesse aquivo será definido os relacionamentos entre tabelas
+import Jogador from "../models/Jogador.js";
+import Partida from "../models/Partida.js";
 
-// Model Cliente
-import Cliente from "../models/Cliente.js";
-
-// Model Pedido
-import Pedido from "../models/Pedido.js";
-
-// Definindo os relacionamentos entre os Models
 const defineAssociac = () => {
-  // Um cliente possui muitos pedidos
-  Cliente.hasMany(Pedido, { foreignKey: "cliente_id" });
-
-  // Um Pedido pertenece somente a um Cliente
-  Pedido.belongsTo(Cliente, { foreignKey: "cliente_id" });
+  Jogador.hasMany(Partida, {
+    foreignKey: "jogador_id",
+    onDelete: "RESTRICT",
+    onUpdate: "CASCADE",
+  });
+  Partida.belongsTo(Jogador, {
+    as: "jogador",
+    foreignKey: "jogador_id",
+    onDelete: "RESTRICT",
+    onUpdate: "CASCADE",
+  });
 };
 
-// Exportando
 export default defineAssociac;

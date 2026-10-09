@@ -1,24 +1,21 @@
-// Model produto
-
-//Importando o arquivo de conexão
 import connection from "../config/sequelize-config.js";
-// Importando a biblioteca sequelize
 import Sequelize from "sequelize";
 
-const Produto = connection.define("produtos", {
+const Brawler = connection.define("brawlers", {
   nome: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  preco: {
+  poder: {
     type: Sequelize.FLOAT,
     allowNull: false,
   },
-  categoria: {
+  classe: {
     type: Sequelize.STRING,
     allowNull: false,
   },
+}, {
+  tableName: "brawlers",
 });
 
-// Exportando o modulo
-export default Produto;
+export default Brawler;

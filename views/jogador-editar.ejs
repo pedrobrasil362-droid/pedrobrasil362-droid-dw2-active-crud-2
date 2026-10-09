@@ -1,0 +1,38 @@
+<%- include ('partials/header.ejs') %>
+<%- include ('partials/navbar.ejs') %>
+
+<main class="page-shell">
+    <section class="panel">
+        <div class="panel-heading">
+            <span class="card-icon">🎮</span>
+            <div>
+                <h1>Editar jogador</h1>
+                <p>Atualize os dados de <%= jogador.nick %>.</p>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form action="/jogadores/<%= jogador.id %>/atualizar" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nick">Nick do jogador</label>
+                        <input type="text" name="nick" id="nick" value="<%= jogador.nick %>" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_jogador">ID de jogador</label>
+                        <input type="text" name="id_jogador" id="id_jogador" value="<%= jogador.id_jogador %>" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="clube_regiao">Clube / região</label>
+                        <input type="text" name="clube_regiao" id="clube_regiao" value="<%= jogador.clube_regiao %>" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success">Salvar alterações</button>
+                    <a href="/jogadores" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<%- include ('partials/footer.ejs') %>
